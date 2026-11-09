@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion as Motion, useScroll, useTransform } from "framer-motion";
 
 import heroBeans from "../assets/hero-beans.png";
 import Badge from "./ui/Badge";
@@ -22,7 +22,7 @@ export default function HeroSection() {
             Premium Coffee Beans • Roasted Fresh Daily
           </Badge>
 
-          <motion.h1
+          <Motion.h1
             className="h1-stack"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -32,9 +32,9 @@ export default function HeroSection() {
             <span className="muted"> FOR COFFEE</span>
             <br />
             BREWING
-          </motion.h1>
+          </Motion.h1>
 
-          <motion.p
+          <Motion.p
             className="lead"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ export default function HeroSection() {
           >
             Small-batch coffees sourced from the world’s most exciting farms — roasted to bring out
             vibrant sweetness, balanced body, and unforgettable character in every cup.
-          </motion.p>
+          </Motion.p>
 
           <div className="hero-actions">
             <Button variant="accent" onClick={() => scrollToSection("shop")}>
@@ -61,16 +61,16 @@ export default function HeroSection() {
         </div>
 
         <div className="hero-art-container">
-          <motion.img
+          <Motion.img
             src={heroBeans}
             alt="Fresh roasted coffee beans"
             className="hero-art"
             style={{ scale: imgScale, opacity: imgOpacity, y: imgY }}
           />
-          <div className="absolute right-8 top-10 rounded-full border border-white/30 bg-[rgba(30,23,20,0.75)] px-4 py-3 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--cream)] shadow-xl backdrop-blur-sm">
-            <div>From</div>
-            <div className="mt-1 text-xl text-[var(--amber-light)]">$14.99</div>
-            <div className="text-[9px] tracking-[0.15em] text-white/70">per bag</div>
+          <div className="hero-floating-badge">
+            <span className="hero-floating-badge-label">From</span>
+            <span className="hero-floating-badge-price">$14.99</span>
+            <span className="hero-floating-badge-label">per bag</span>
           </div>
         </div>
       </div>
