@@ -13,13 +13,16 @@ export default function AboutSection() {
             Thoughtful sourcing. Honest roasting.
           </h2>
           <p className="mt-6 max-w-xl text-base leading-8 text-white/75">
-            We partner with growers who care deeply about quality, climate, and community. From the
-            first harvest to the final roast, every step is built around flavor clarity, sustainability,
-            and character.
+              The Beans Place started in 2012 with the one simple belief: great coffee
+              should be accessible to everyone - not just aficionados. We work 
+              directly with farming cooperatives across continents, paying 
+              above fair-trade prices to ensure quality from soil to sip.
           </p>
           <p className="mt-4 max-w-xl text-base leading-8 text-white/75">
-            The result is a cup that feels layered and alive — sweet, structured, and ready to carry the
-            moments that matter.
+              Every week, our raostmaster cups dozens of samples to select only
+              the lots that meet our standard. Whether you prefer a bright, fruity
+              Ethopian Yirgacheffe or a deep, chocolatey Colombian Supremo, we roast
+              each batch to order so it arrives at peak freshness.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">

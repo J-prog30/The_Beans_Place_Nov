@@ -38,6 +38,13 @@
     --store-badge-hover-bg: rgba(255, 255, 255, 0.12);
     --store-badge-text: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.7);
+    --cart-bg: var(--cream-light);
+    --cart-text: var(--brown-900);
+    --cart-muted: var(--brown-700);
+    --cart-card-bg: rgba(255, 255, 255, 0.7);
+    --cart-control-bg: var(--cream);
+    --cart-border: rgba(74, 55, 44, 0.2);
+    --cart-footer-bg: var(--cream-light);
 }
 
 html.dark {
@@ -55,6 +62,23 @@ html.dark {
     --store-badge-hover-bg: rgba(255, 255, 255, 0.18);
     --store-badge-text: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.75);
+    --cart-bg: #1e1714;
+    --cart-text: #f5e6d3;
+    --cart-muted: rgba(245, 230, 211, 0.72);
+    --cart-card-bg: rgba(255, 255, 255, 0.06);
+    --cart-control-bg: rgba(255, 255, 255, 0.08);
+    --cart-border: rgba(245, 230, 211, 0.16);
+    --cart-footer-bg: #1e1714;
+}
+
+.cart-drawer-panel {
+    color: var(--cart-text);
+    background: var(--cart-bg);
+}
+
+.shopping-cart-footer {
+    border-color: var(--cart-border);
+    background: var(--cart-footer-bg);
 }
 
 :root {
@@ -447,6 +471,12 @@ html.dark .lead {
     max-width: 320px;
     aspect-ratio: 3 / 2;
     flex: 0 0 auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
     overflow: hidden;
     border-radius: 16px;
     box-shadow:

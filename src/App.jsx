@@ -36,6 +36,7 @@ export default function App() {
       }
       return [...current, { ...product, qty: 1 }];
     });
+    setCartOpen(true);
   };
 
   const updateCartQty = (id, delta) => {
@@ -76,6 +77,7 @@ export default function App() {
         onRemove={removeFromCart}
         cartCount={cartCount}
         subtotal={subtotal}
+        theme={theme}
       />
 
       <NavBar
@@ -90,10 +92,10 @@ export default function App() {
         <RibbonTicker />
 
         <section className="features bg-features" id="shop">
-          <FeaturesSection />
+          <FeaturesSection addToCart={addToCart} />
         </section>
 
-        <section className="bg-cta">
+        <section className="bg-cta" id="coffee-products">
           <ProductShowcase addToCart={addToCart} />
         </section>
 

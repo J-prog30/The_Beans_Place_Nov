@@ -1,79 +1,10 @@
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
-import imgColombianSupremo from "../assets/Colombian-Supremo-Bag.png";
-import imgEthiopianHarrar from "../assets/Ethiopian-Harrar-Bag.png";
-import imgGuatemalaAntigua from "../assets/Guatemala-Antigua-Bag.png";
-import imgKenyaAA from "../assets/Kenya-AA-Bag.png";
-import imgKona from "../assets/Kona-Bag.png";
-import imgPanamaGeisha from "../assets/Panama-Geisha.png";
-
+import { products } from "../lib/productCatalog";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
 import Separator from "./ui/Separator";
 import ScrollReveal, { StaggerContainer, StaggerItem } from "./ui/ScrollReveal";
-
-const products = [
-  {
-    id: "ethiopian-harrar",
-    name: "Ethiopian Harrar",
-    origin: "Ethiopia",
-    price: "$18.99",
-    roast: "Medium",
-    notes: "Blueberry, dark chocolate, wine",
-    image: imgEthiopianHarrar,
-    badge: "Best Seller",
-  },
-  {
-    id: "colombian-supremo",
-    name: "Colombian Supremo",
-    origin: "Colombia",
-    price: "$16.99",
-    roast: "Medium-Dark",
-    notes: "Caramel, citrus peel, cocoa",
-    image: imgColombianSupremo,
-    badge: null,
-  },
-  {
-    id: "kenya-aa",
-    name: "Kenya AA",
-    origin: "Kenya",
-    price: "$21.99",
-    roast: "Light",
-    notes: "Blackcurrant, jasmine, stone fruit",
-    image: imgKenyaAA,
-    badge: "Staff Pick",
-  },
-  {
-    id: "panama-geisha",
-    name: "Panama Geisha",
-    origin: "Panama",
-    price: "$34.99",
-    roast: "Light",
-    notes: "Tea-like florals, mango, honey",
-    image: imgPanamaGeisha,
-    badge: "Limited",
-  },
-  {
-    id: "kona",
-    name: "Kona",
-    origin: "Hawaii",
-    price: "$29.99",
-    roast: "Medium",
-    notes: "Macadamia, brown sugar, cocoa",
-    image: imgKona,
-    badge: null,
-  },
-  {
-    id: "guatemala-antigua",
-    name: "Guatemala Antigua",
-    origin: "Guatemala",
-    price: "$17.99",
-    roast: "Dark",
-    notes: "Cherry, cocoa nib, caramel",
-    image: imgGuatemalaAntigua,
-    badge: "New",
-  },
-];
 
 export default function ProductShowcase({ addToCart }) {
   return (
@@ -93,7 +24,7 @@ export default function ProductShowcase({ addToCart }) {
       <StaggerContainer className="product-grid" amount={0.2}>
         {products.map((product) => (
           <StaggerItem key={product.name} className="product-card-wrap">
-            <motion.div className="product-card" whileHover={{ y: -8 }}>
+            <Motion.div className="product-card" whileHover={{ y: -8 }}>
               <div className="product-card-image">
                 <img src={product.image} alt={product.name} />
                 {product.badge && <span className="product-badge">{product.badge}</span>}
@@ -112,11 +43,17 @@ export default function ProductShowcase({ addToCart }) {
 
                 <p className="product-notes">{product.notes}</p>
 
-                <Button variant="accent" className="w-full" onClick={() => addToCart(product)}>
+                <Button
+                  type="button"
+                  variant="accent"
+                  className="w-full"
+                  aria-label={`Add ${product.name} to cart`}
+                  onClick={() => addToCart(product)}
+                >
                   Add to Cart
                 </Button>
               </div>
-            </motion.div>
+            </Motion.div>
           </StaggerItem>
         ))}
       </StaggerContainer>

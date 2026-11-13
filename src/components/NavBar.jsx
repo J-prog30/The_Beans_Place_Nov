@@ -30,9 +30,28 @@
 
 /* --- YOUR IMPORTS GO HERE --- */
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import logo from "../assets/Beans_logo.png";
 import Button from "./ui/Button";
+
+function ShoppingBagIcon({ size = 18 }) {
+    return (
+        <svg
+            aria-hidden="true"
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <path d="M5 8h14l1 13H4L5 8Z" />
+            <path d="M9 9V6a3 3 0 0 1 6 0v3" />
+        </svg>
+    );
+}
 // STEP 2: Create and export the NavBar component
 // export default function NavBar() { ... }
 //
@@ -85,7 +104,7 @@ import Button from "./ui/Button";
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
 
-export default function NavBar({ toggleCart, theme, onToggleTheme }) {
+export default function NavBar({ toggleCart, cartCount = 0, theme, onToggleTheme }) {
     const [menuOpen, setMenuOpen] = useState(false); 
     // container = menuOpen, Function to udate the container = setMenuOpen, current value = false
     const [scrolled, setScrolled] = useState(false); 
@@ -101,7 +120,7 @@ export default function NavBar({ toggleCart, theme, onToggleTheme }) {
     
     return (
         // motion.header is a root element which is a third-party component from framer-motion.
-        <motion.header 
+        <Motion.header 
             className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -138,9 +157,10 @@ export default function NavBar({ toggleCart, theme, onToggleTheme }) {
                     >
                         {theme === "dark" ? "☀️" : "🌙" }
                     </button>
-                    <button variant="accent" size="sm" onClick={toggleCart}>
-                        Order Now
-                    </button>
+                    <Button variant="accent" size="sm" onClick={toggleCart}>
+                        <ShoppingBagIcon size={16} />
+                        <span>Cart{cartCount > 0 ? ` (${cartCount})` : ""}</span>
+                    </Button>
                 </div>
                 <button
                     type="button"
@@ -165,7 +185,7 @@ export default function NavBar({ toggleCart, theme, onToggleTheme }) {
             {/* Mobile Menu */}
             <AnimatePresence>
                 {menuOpen && (
-                    <motion.div
+                    <Motion.div
                         className="overflow-hidden bg-white md:hidden"
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
@@ -217,18 +237,19 @@ export default function NavBar({ toggleCart, theme, onToggleTheme }) {
 
                             <button
                                 type="button"
-                                className="mt-2 w-full"
+                                className="mt-2 flex w-full items-center justify-center gap-2"
                                 onClick={() => {
                                     toggleCart();
                                     claseMenu();
                                 }}
                             >
-                                Order Now
+                                <ShoppingBagIcon size={18} />
+                                <span>Cart{cartCount > 0 ? ` (${cartCount})` : ""}</span>
                             </button>
                         </nav>
-                    </motion.div>
+                    </Motion.div>
                 )}
             </AnimatePresence>
-        </motion.header>
+        </Motion.header>
     );
 }
