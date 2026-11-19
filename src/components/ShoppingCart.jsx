@@ -51,12 +51,36 @@ export default function ShoppingCart({
           ) : (
             items.map((item) => (
               <div key={item.id} className="flex gap-4 rounded-2xl border border-[var(--cart-border)] bg-[var(--cart-card-bg)] p-3">
-                <img src={item.image} alt={item.name} className="h-20 w-20 rounded-xl object-cover" />
+                {item.type === "bundle" ? (
+                  <div className="grid h-20 w-20 shrink-0 grid-cols-2 gap-1">
+                    {item.products.map((product) => (
+                      <img
+                        key={product.id}
+                        src={product.image}
+                        alt=""
+                        className="h-full w-full rounded-md object-cover"
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <img src={item.image} alt={item.name} className="h-20 w-20 rounded-xl object-cover" />
+                )}
                 <div className="flex-1">
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="font-semibold">{item.name}</p>
-                      <p className="text-sm text-[var(--cart-muted)]">{item.origin}</p>
+                      {item.type === "bundle" ? (
+                        <>
+                          <p className="text-sm text-[var(--cart-muted)]">
+                            Buy 3, get 1 free · {item.freeProduct.name} is free
+                          </p>
+                          <p className="mt-1 text-xs text-[var(--cart-muted)]">
+                            {item.products.map((product) => product.name).join(", ")}
+                          </p>
+                        </>
+                      ) : (
+                        <p className="text-sm text-[var(--cart-muted)]">{item.origin}</p>
+                      )}
                     </div>
                     <button type="button" onClick={() => onRemove(item.id)} className="text-sm text-[var(--cart-muted)]">
                       Remove
@@ -81,7 +105,9 @@ export default function ShoppingCart({
                         +
                       </button>
                     </div>
-                    <p className="font-bold">{item.price}</p>
+                    <p className="font-bold">
+                      {item.type === "bundle" ? `$${item.unitPrice.toFixed(2)}` : item.price}
+                    </p>
                   </div>
                 </div>
               </div>

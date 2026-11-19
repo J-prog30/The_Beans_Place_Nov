@@ -11,6 +11,8 @@ import ContactSection from "./components/ContactSection";
 import FooterSection from "./components/FooterSection";
 import ShoppingCart from "./components/ShoppingCart";
 
+const getPrice = (price) => Number(String(price).replace(/[$,]/g, ""));
+
 export default function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -39,6 +41,27 @@ export default function App() {
     setCartOpen(true);
   };
 
+  const addBundleToCart = (bundleProducts) => {
+    const prices = bundleProducts.map((product) => getPrice(product.price));
+    const lowestPrice = Math.min(...prices);
+    const freeProduct = bundleProducts[prices.indexOf(lowestPrice)];
+    const bundlePrice = prices.reduce((total, price) => total + price, 0) - lowestPrice;
+
+    setCartItems((current) => [
+      ...current,
+      {
+        id: `bundle-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        type: "bundle",
+        name: "Build Your Box (4 coffees)",
+        products: bundleProducts,
+        freeProduct,
+        unitPrice: bundlePrice,
+        qty: 1,
+      },
+    ]);
+    setCartOpen(true);
+  };
+
   const updateCartQty = (id, delta) => {
     setCartItems((current) =>
       current
@@ -54,14 +77,18 @@ export default function App() {
   };
 
   const cartCount = useMemo(
-    () => cartItems.reduce((total, item) => total + item.qty, 0),
+    () =>
+      cartItems.reduce(
+        (total, item) => total + item.qty * (item.type === "bundle" ? item.products.length : 1),
+        0,
+      ),
     [cartItems],
   );
 
   const subtotal = useMemo(
     () =>
       cartItems.reduce((total, item) => {
-        const price = Number(String(item.price).replace(/[$,]/g, ""));
+        const price = item.type === "bundle" ? item.unitPrice : getPrice(item.price);
         return total + price * item.qty;
       }, 0),
     [cartItems],
@@ -101,7 +128,7 @@ export default function App() {
 
         <RibbonTicker />
 
-        <CtaSection />
+        <CtaSection onAddBundle={addBundleToCart} />
         <AboutSection />
         <ContactSection />
       </main>

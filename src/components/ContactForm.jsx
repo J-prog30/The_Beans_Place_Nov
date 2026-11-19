@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "./ui/Button";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -100,9 +101,14 @@ export default function ContactForm() {
 
       {message && <p className="mt-4 text-sm text-[var(--amber-light)]">{message}</p>}
 
-      <button type="submit" className="contact-form-submit" disabled={loading}>
+      <Button
+        type="submit"
+        variant="accent"
+        className="contact-form-submit"
+        disabled={loading}
+      >
         {loading ? "Sending..." : "Send message"}
-      </button>
+      </Button>
     </form>
   );
 }
